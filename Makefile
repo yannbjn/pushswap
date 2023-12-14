@@ -6,7 +6,7 @@
 #    By: gemartin <gemartin@student.42barc...>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 02:30:43 by gemartin          #+#    #+#              #
-#    Updated: 2023/12/14 15:21:56 by yabejani         ###   ########.fr        #
+#    Updated: 2023/12/14 15:26:24 by yabejani         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -53,7 +53,7 @@ INCLUDE_BONUS = ./pushswap_bonus.h
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -MMD
+CFLAGS = -Wall -Wextra -Werror
 
 %.o: %.c
 			@echo "${BLUE} ◎ $(BROWN)Compiling   ${MAGENTA}→   $(CYAN)$< $(DEF_COLOR)"
