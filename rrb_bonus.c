@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rrb_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gemartin <gemartin@student.42barc...>      +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 13:55:25 by gemartin          #+#    #+#             */
-/*   Updated: 2022/04/11 15:15:00 by marvin           ###   ########.fr       */
+/*   Created: 2023/12/14 15:22:55 by yabejani          #+#    #+#             */
+/*   Updated: 2023/12/14 15:23:11 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/pushswap_bonus.h"
+#include "pushswap_bonus.h"
 
 void	rrb(t_list *d)
 {

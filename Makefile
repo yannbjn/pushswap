@@ -6,7 +6,7 @@
 #    By: gemartin <gemartin@student.42barc...>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/02 02:30:43 by gemartin          #+#    #+#              #
-#    Updated: 2023/12/14 14:55:31 by yabejani         ###   ########.fr        #
+#    Updated: 2023/12/14 15:21:56 by yabejani         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -51,7 +51,7 @@ INCLUDE = ./pushswap.h
 
 INCLUDE_BONUS = ./pushswap_bonus.h
 
-CC = gcc
+CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror -MMD
 
