@@ -1,65 +1,98 @@
-# Standard
-NAME				= push_swap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/12 10:33:46 by bedos-sa          #+#    #+#              #
+#    Updated: 2023/09/02 22:14:06 by bedos-sa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# Directories
-LIBFT				= ./libft/libft.a
-INC					= inc/
-SRC_DIR				= srcs/
-OBJ_DIR				= obj/
+vpath %.c srcs
+vpath %.c bonus
 
-# Compiler and CFlags
-CC					= gcc
-CFLAGS				= -Wall -Werror -Wextra -I
-RM					= rm -f
+NAME = push_swap
+NAME_BONUS = checker
 
-# Source Files
-COMMANDS_DIR		=	$(SRC_DIR)commands/push.c \
-						$(SRC_DIR)commands/rev_rotate.c \
-						$(SRC_DIR)commands/rotate.c \
-						$(SRC_DIR)commands/sort_stacks.c \
-						$(SRC_DIR)commands/sort_three.c \
-						$(SRC_DIR)commands/swap.c
+CC = cc
+FLAGS = -O3 -g3 -L -lft
+CFLAGS = -Wall -Wextra -Werror -g 
 
-PUSH_SWAP_DIR		=	$(SRC_DIR)push_swap/handle_errors.c \
-						$(SRC_DIR)push_swap/init_a_to_b.c \
-						$(SRC_DIR)push_swap/init_b_to_a.c \
-						$(SRC_DIR)push_swap/push_swap.c \
-						$(SRC_DIR)push_swap/split.c \
-						$(SRC_DIR)push_swap/stack_init.c \
-						$(SRC_DIR)push_swap/stack_utils.c
+LIBFT = ./libft
+LIBS = /include
 
-# Concatenate all source files
-SRCS 				= $(COMMANDS_DIR) $(PUSH_SWAP_DIR)
+RM = rm -f
+FILES = push_swap.c \
+		input_error.c \
+		linked_list_a.c \
+		linked_list_b.c \
+		sorting.c \
+		moves_swap.c \
+		check_list.c \
+		sort_four.c \
+		sort_three.c \
+		sort_two.c \
+		moves_rotate.c \
+		moves_rev_rotate.c \
+		moves_push.c \
+		find_cheapest.c \
+		check_max_min_b.c \
+		check_max_min_a.c \
+		checks_cheapest.c \
+		free_all.c \
+		move_back.c \
+		new_min_stack_a.c \
+		new_max_stack_a.c \
+		new_elem_stack_a.c \
+		new_in_stack_b.c
 
-# Apply the pattern substitution to each source file in SRC and produce a corresponding list of object files in the OBJ_DIR
-OBJ 				= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
+FILES_BONUS = checker_bonus.c \
+			  input_error_bonus.c \
+			  linked_list_a_bonus.c \
+			  free_all_bonus.c \
+			  linked_list_b_bonus.c \
+			  moves_push_bonus.c \
+			  moves_rev_rotate_bonus.c \
+			  moves_rotate_bonus.c \
+			  moves_swap_bonus.c
+OBJ_DIR = build
 
-# Build rules
-start:				
-					@make all
+OBJS = $(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
+OBJS_BONUS = $(addprefix $(OBJ_DIR)/, $(FILES_BONUS:.c=.o))
 
-$(LIBFT):
-					@make -C ./libft
+green = \033[32m
+reset = \033[0m
 
-all: 				$(NAME)
+all: $(NAME)
 
-$(NAME): 			$(OBJ) $(LIBFT)
-					@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $(NAME)
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I.$(LIBS) -c $< -o $@
 
-# Compile object files from source files
-$(OBJ_DIR)%.o:		$(SRC_DIR)%.c 
-					@mkdir -p $(@D)
-					@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+$(NAME): $(OBJS)
+	make -C $(LIBFT)
+	$(CC) $(OBJS) $(CFLAGS) $(LIBFT)/libft.a -O3 -g3 -L -lft -o $(NAME)
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS_BONUS)
+	make -C $(LIBFT)
+	$(CC) $(OBJS_BONUS) $(CFLAGS) $(LIBFT)/libft.a $(FLAGS) -o $(NAME_BONUS)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 clean:
-					@$(RM) -r $(OBJ_DIR)
-					@make clean -C ./libft
+	make clean -C $(LIBFT)
+	$(RM) $(OBJS) $(OBJS_BONUS)
 
-fclean: 			clean
-					@$(RM) $(NAME)
-					@$(RM) $(LIBFT)
+fclean: clean
+	make fclean -C $(LIBFT)
+	$(RM) $(NAME) $(NAME_BONUS)
 
-re: 				fclean all
+re: fclean all
 
-# Phony targets represent actions not files
-.PHONY: 			start all clean fclean re
+re_bonus: fclean bonus
+
+.PHONY: all clean fclean re bonus re_bonus
