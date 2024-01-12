@@ -3,31 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 07:52:26 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/05/12 16:01:40 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/08 15:46:51 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*dest;
-	size_t	str_len;
+	size_t	i;
+	char	*str;
 
 	if (!s)
 		return (NULL);
-	str_len = ft_strlen((char *)s);
-	if (start > str_len)
-		return (ft_strdup(""));
-	if (str_len - start >= len)
-		dest = (char *)malloc((len + 1) * sizeof(char));
-	else
-		dest = (char *)malloc((str_len - start + 1) * sizeof(char));
-	if (!dest)
+	if (start >= ft_strlen(s))
+		len = 0;
+	else if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
-	ft_strlcpy(dest, (s + start), (len + 1));
-	return (dest);
+	i = 0;
+	while (start + i < ft_strlen(s) && i < len)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

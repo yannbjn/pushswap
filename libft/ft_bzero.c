@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 08:00:35 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/05/11 12:46:34 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/06 15:40:29 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// The bzero() function sets the first n bytes of the area starting at s to 
-// zero (bytes containing aq\0aq).
-
-#include "libft.h"
+#include "../inc/libft.h"
 
 void	ft_bzero(void *s, size_t n)
-{	
-	ft_memset(s, 0, n);
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		*(unsigned char *)(s + i) = 0;
+		i++;
+	}
 }

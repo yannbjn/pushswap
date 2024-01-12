@@ -3,26 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 15:29:17 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/07/11 17:42:19 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/06 15:07:09 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// RETURN VALUE: The strlen() function returns the number of bytes in the 
-// string str.
+#include "../inc/libft.h"
 
-#include "libft.h"
-
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }

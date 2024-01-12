@@ -3,33 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 15:18:01 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/05/12 15:59:33 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/06 17:16:50 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	char	ch;
+	long int	i;
 
-	i = ft_strlen((char *)s);
-	ch = (unsigned char)c;
-	if (s[i] == '\0' && ch == '\0')
-		return ((char *)&s[i]);
-	else
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
+		if (s[i] == (char) c)
+			return ((char *) s + i);
 		i--;
-		while (i >= 0)
-		{
-			if (s[i] == ch)
-				return ((char *)&s[i]);
-			i--;
-		}
 	}
 	return (NULL);
 }

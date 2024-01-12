@@ -3,31 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 15:37:08 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/08/08 14:09:01 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/10 11:12:47 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// The first while will take off the characters at the beginning, by making s1
-// to start at the first char that isn't on the 'set'. Then we count len--; to
-// every char that is on the 'set', but at the end of the str. Then we use
-// substr to make the return value, the size max used in substr is the len of
-// s1 minus the chars at the end.
+#include "../inc/libft.h"
 
-#include "libft.h"
+static size_t	check_char(char const *str, char const c)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static char	*malloc_newstr(size_t len)
+{
+	char	*str;
+
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	return (str);
+}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	s_len;
+	char	*str;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
-	if (s1 == NULL || set == NULL)
+	if (!s1)
 		return (NULL);
-	while (*s1 && ft_strchr(set, *s1))
-		s1++;
-	s_len = ft_strlen((char *)s1) - 1;
-	while (s_len && ft_strchr(set, s1[s_len]))
-		s_len--;
-	return (ft_substr(s1, 0, s_len + 1));
+	start = 0;
+	while (s1[start] && check_char(set, s1[start]))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && check_char(set, s1[end - 1]))
+		end--;
+	str = malloc_newstr(end - start);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while ((start + i) < end)
+	{
+		str[i] = s1[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

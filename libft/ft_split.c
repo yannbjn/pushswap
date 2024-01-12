@@ -6,11 +6,11 @@
 /*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:41:34 by yabejani          #+#    #+#             */
-/*   Updated: 2024/01/04 14:44:23 by yabejani         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 void	free_tab(char **tab)
 {

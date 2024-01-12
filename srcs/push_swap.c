@@ -5,22 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 15:25:34 by bedos-sa          #+#    #+#             */
-/*   Updated: 2024/01/04 16:17:30 by yabejani         ###   ########.fr       */
+/*   Created: 2024/01/04 17:37:46 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/12 18:03:36 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 int	main(int argc, char **argv)
 {
-	t_stacks	stacks;
-	char		**split_argv;
+	t_stack	*a;
 
-	split_argv = input_error(argc, argv);
-	stacks.head_a = create_list_a(split_argv);
-	stacks.head_b = NULL;
-	check_for_doubles(stacks.head_a);
-	sorting(&stacks);
-	free_for_all(&stacks);
+	a = NULL;
+	if (argc == 1)
+		exit(0);
+	if (argc == 2)
+		a = ft_one_arg(argv);
+	else if (argc > 2)
+		a = ft_multiple_args(argc, argv);
+	if (ft_check_for_dup(a))
+	{
+		ft_free_stack(&a);
+		ft_error();
+	}
+	if (!ft_check_if_sort(a))
+		ft_sort(&a);
+	ft_free_stack(&a);
+	return (0);
 }

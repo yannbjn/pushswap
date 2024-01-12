@@ -3,49 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 13:45:41 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/05/12 15:55:47 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/10 12:08:42 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
-static int	count(long int n)
+static int	ft_len(long int nbr)
 {
-	if (n < 0)
-		return (1 + count(-n));
-	if ((n / 10) == 0)
-		return (1);
+	int	len;
+
+	if (nbr <= 0)
+		len = 1;
 	else
-		return (1 + count(n / 10));
+		len = 0;
+	while (nbr != 0)
+	{
+		nbr /= 10;
+		len++;
+	}
+	return (len);
 }
 
-static void	base(long int n, char *number, long int i)
+static long long	ft_abs(long long n)
 {
+	long long	nb;
+
 	if (n < 0)
-	{
-		number[0] = '-';
-		n *= -1;
-	}
-	if (n >= 10)
-	{
-		base((n / 10), number, (i - 1));
-	}
-	number[i] = (n % 10) + '0';
+		nb = -n;
+	else
+		nb = n;
+	return (nb);
 }
 
-char	*ft_itoa(int n)
+static char	*ft_mallocstr(size_t nbr)
 {
-	char		*num_char;
-	long int	len;
+	char	*str;
 
-	len = count(n);
-	num_char = (char *)malloc((len + 1) * sizeof(char));
-	if (!num_char)
+	str = malloc(sizeof(char) * (nbr + 1));
+	if (!str)
 		return (NULL);
-	num_char[len] = '\0';
-	base(n, num_char, --len);
-	return (num_char);
+	return (str);
 }
+
+char	*ft_itoa(int nbr)
+{
+	int				len;
+	int				sign;
+	unsigned int	nb;
+	char			*str;
+
+	sign = 42;
+	if (nbr < 0)
+		sign = -1;
+	len = ft_len(nbr);
+	str = ft_mallocstr(len);
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	len--;
+	nb = ft_abs(nbr);
+	while (len >= 0)
+	{
+		str[len] = nb % 10 + 48;
+		nb = nb / 10;
+		len--;
+	}
+	if (sign == -1)
+		str[0] = '-';
+	return (str);
+}
+
+/*int	main(int argc, char **argv)
+{
+	(void)argc;
+	printf("%s\n", ft_itoa(atoi(argv[1])));
+}*/

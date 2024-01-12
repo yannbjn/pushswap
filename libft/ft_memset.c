@@ -3,26 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bedos-sa <bedos-sa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yabejani <yabejani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 15:37:14 by bedos-sa          #+#    #+#             */
-/*   Updated: 2023/05/04 08:29:12 by bedos-sa         ###   ########.fr       */
+/*   Created: 2023/11/06 15:15:49 by yabejani          #+#    #+#             */
+/*   Updated: 2024/01/08 17:58:34 by yabejani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// To use the elements inside the returned array s: (unsigned char *)s[i]
+#include "../inc/libft.h"
 
-#include "libft.h"
-
-void	*ft_memset(void *s, int c, size_t x)
+void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < x)
+	while (i < n)
 	{
-		((unsigned char *)s)[i] = c;
+		*(unsigned char *)(s + i) = (unsigned char) c;
 		i++;
 	}
 	return (s);
 }
+/*int main ()
+{
+    char *src = "bonjkjour";
+    char dest[10];
+    size_t n = 1;
+
+    printf("%p\n", ft_memset(dest, src, n));
+    printf("%p\n", memset(dest, src, n));
+}*/
